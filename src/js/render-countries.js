@@ -28,8 +28,8 @@ const renderingOfCountries = () => {
       //   text: 'Something terrible happened.',
       // });
       error({
-        title: 'Oh No!',
-        text: 'Something terrible happened.',
+        // title: 'Oh No!',
+        text: 'Too many matces found. Please enter a more specific query!',
       });
     }
   });
