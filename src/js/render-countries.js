@@ -12,26 +12,40 @@ const refs = {
 };
 
 const renderingOfCountries = () => {
-  fetchCountry(refs.inputField.value).then(data => {
-    if (data.length === 1) {
-      console.log(data);
-      const markup = oneCountry(data);
-      refs.chosenCountry.insertAdjacentHTML('beforeend', markup);
-    } else if (data.length > 1 && data.length < 11) {
-      console.log(data);
-      const markup = manyCountries(data);
-      refs.listOfCountries.insertAdjacentHTML('beforeend', markup);
-    } else {
-      // const PNotify = require('@pnotify/core');
-      // PNotify.error({
-      //   title: 'Oh No!',
-      //   text: 'Something terrible happened.',
-      // });
-      error({
-        // title: 'Oh No!',
-        text: 'Too many matces found. Please enter a more specific query!',
-      });
-    }
-  });
+  refs.listOfCountries.innerHTML = '';
+  refs.chosenCountry.innerHTML = '';
+  if (refs.inputField.value !== '') {
+    fetchCountry(refs.inputField.value).then(data => {
+      if (data === 404) {
+        error({
+          title: 'Not found',
+          text: '404!',
+        });
+        return;
+      }
+
+      if (data.length === 1) {
+        console.log(data);
+        const markup = oneCountry(data);
+        refs.chosenCountry.insertAdjacentHTML('beforeend', markup);
+      } else if (data.length > 1 && data.length < 11) {
+        console.log(data);
+        const markup = manyCountries(data);
+        refs.listOfCountries.insertAdjacentHTML('beforeend', markup);
+      } else {
+        // const PNotify = require('@pnotify/core');
+        // PNotify.error({
+        //   title: 'Oh No!',
+        //   text: 'Something terrible happened.',
+        // });
+        error({
+          // title: 'Oh No!',
+          text: 'Too many matces found. Please enter a more specific query!',
+        });
+      }
+    });
+  } else {
+    return;
+  }
 };
 export default renderingOfCountries;

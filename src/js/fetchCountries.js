@@ -1,16 +1,16 @@
-import renderingOfCountries from './render-countries';
-
-const refs = {
-  inputField: document.querySelector('input[name="countryname"]'),
-  listOfCountries: document.querySelector('.js-countries'),
-  chosenCountry: document.querySelector('.js-chosen-country'),
-};
+import { error } from '@pnotify/core';
+import '@pnotify/core/dist/PNotify.css';
+import '@pnotify/core/dist/BrightTheme.css';
 
 export default function fetchCountry(searchQuery) {
   let url = `https://restcountries.eu/rest/v2/name/${searchQuery}`;
-  refs.listOfCountries.innerHTML = '';
-  refs.chosenCountry.innerHTML = '';
+
   return fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      if (res.status === 404) {
+        return res.status;
+      }
+      return res.json();
+    })
     .catch(error => console.log(error));
 }
