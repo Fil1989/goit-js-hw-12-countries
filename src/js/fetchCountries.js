@@ -1,7 +1,3 @@
-import { error } from '@pnotify/core';
-import '@pnotify/core/dist/PNotify.css';
-import '@pnotify/core/dist/BrightTheme.css';
-
 export default function fetchCountry(searchQuery) {
   let url = `https://restcountries.eu/rest/v2/name/${searchQuery}`;
 
