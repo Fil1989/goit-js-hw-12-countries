@@ -25,11 +25,9 @@ const renderingOfCountries = () => {
       }
 
       if (data.length === 1) {
-        console.log(data);
         const markup = oneCountry(data);
         refs.chosenCountry.insertAdjacentHTML('beforeend', markup);
       } else if (data.length > 1 && data.length < 11) {
-        console.log(data);
         const markup = manyCountries(data);
         refs.listOfCountries.insertAdjacentHTML('beforeend', markup);
       } else {
